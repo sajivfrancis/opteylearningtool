@@ -11,7 +11,7 @@ Our site contains the best learning content and tools to help you succeed.
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 Click on poster below to play video on youtube:
 
-[![olt](https://raw.githubusercontent.com/sajivfrancis/opteylearningtool/master/source/content/media/oltgithubimage.png)](https://youtu.be/uzxuCmjRxRs)
+[![olt](https://raw.githubusercontent.com/sajivfrancis/opteylearningtool/master/source/content/media/olt.png)](https://youtu.be/uzxuCmjRxRs)
 
 ### Software Components
 
