@@ -1,0 +1,61 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %}{% endblock %}
+
+{% block javascript %}
+  {# JQUERY FILE UPLOAD SCRIPTS #}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.28.0/js/vendor/jquery.ui.widget.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.28.0/js/jquery.iframe-transport.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.28.0/js/jquery.fileupload.js"></script>
+
+  {# PHOTOS PAGE SCRIPTS #}
+  <script>
+    $(function () {
+      /* 1. OPEN THE FILE EXPLORER WINDOW */
+      $(".js-upload-photos").click(function () {
+        $("#fileupload").click();
+      });
+
+      /* 2. INITIALIZE THE FILE UPLOAD COMPONENT */
+      $("#fileupload").fileupload({
+        dataType: 'json',
+        done: function (e, data) {  /* 3. PROCESS THE RESPONSE FROM THE SERVER */
+          if (data.result.is_valid) {
+            $("#gallery tbody").prepend(
+              "<tr><td><a href='" + data.result.url + "'>" + data.result.name + "</a></td></tr>"
+            )
+          }
+        }
+      });
+
+    });
+  </script>
+{% endblock %}
+
+{% block photos_content %}
+  <div style="margin-bottom: 20px;">
+    <button type="button" class="btn btn-primary js-upload-photos">
+      <span class="glyphicon glyphicon-cloud-upload"></span> Upload File
+    </button>
+
+  </div>
+
+  <table id="gallery" class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Files</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for file in photos %}
+        <tr>
+          <td><a href="{{ file.file.url }}">{{ file.file.name }}</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

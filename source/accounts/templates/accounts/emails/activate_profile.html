@@ -1,0 +1,17 @@
+{% extends 'layouts/default/_base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+	<center><h4>{% trans 'Create an account' %}</h4></center>
+	<p>
+		{% trans 'To activate your profile, please follow this link:' %}
+	</p>
+
+	<p>
+		<button class="btn btn-success"> href="{{ uri }}">{{ uri }}</button>
+	</p>
+</div>
+{% endblock %}

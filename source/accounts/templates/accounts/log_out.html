@@ -1,0 +1,14 @@
+{% extends 'layouts/default/_base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+  <div class="jumbotron text-center my-auto" align="center">
+    <div class="container">
+      <strong><h4 class="display-3" style="color: #ff5c5c;">{% trans 'You are now logged out' %}</h1></strong>
+      <strong><center><p>{% trans 'Thank you for visiting Optey Learning Tool.' %}</p></center></strong>
+      <center><p><a class="btn btn-success btn-lg" href="{% url 'accounts:log_in' %}" role="button">{% trans 'Log in to your account' %}</a></p></center>
+      <center><p><a class="btn btn-info btn-lg" href="http://localhost:8000/" role="button">{% trans 'Go back to Homepage' %}</a></p></center>
+    </div>
+  </div>
+{% endblock %}

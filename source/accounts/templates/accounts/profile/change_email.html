@@ -1,0 +1,22 @@
+{% extends 'layouts/default/_base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+
+    <center><h4>{% trans 'Change email' %}</h4></center>
+
+    <div class="container">
+
+    	<form method="post">
+
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        <button class="btn btn-success">{% trans 'Change' %}</button>
+
+    </form>
+</div>
+
+{% endblock %}

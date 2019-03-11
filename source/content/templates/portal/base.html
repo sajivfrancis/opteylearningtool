@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+
+{% block content %}
+<h2 class="page-header">
+  <small> {% block title %}{% endblock %}</small>
+</h2>
+      <div class="list-group">
+
+                <input id="fileupload" type="file" name="file" multiple
+           style="display: none;"
+           data-url="{% url 'portal:file_upload' %}"
+           data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+      </div>
+  <div class="col-md-9">
+    {% block photos_content %}
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}

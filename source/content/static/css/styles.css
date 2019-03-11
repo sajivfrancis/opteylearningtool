@@ -1,0 +1,90 @@
+@import url('http://getbootstrap.com/dist/css/bootstrap.css');
+/*
+Sticky Footer Solution
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* must declare 0 margins on everything, also for main layout components
+use padding, not vertical margins (top and bottom) to add spacing, else
+those margins get added to total height and your footer gets pushed down
+a bit more, creating vertical scroll bars in the browser */
+html, body, .container-table #wrap {
+    height: 100%;
+    overflow:auto;
+}
+div#container {
+[b]min-height: 100%;[/b]
+margin: 0 auto -80px;/*switch it to -80px auto 0*/
+overflow:hidden;/*add*/
+width: 940px;
+overflow:auto;
+}
+* html div nav#container {
+overflow:visible;
+height:100%;
+overflow:auto;
+}
+div#push {
+clear: both;
+overflow:auto;
+}
+div#top {
+  margin-top:80px;
+  overflow:auto;
+}
+.footer {
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+    overflow:auto;
+}
+.container-table {
+    display: table;
+    overflow:auto;
+}
+.vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
+    overflow:auto;
+
+body > #wrap {
+    height: auto;
+    min-height: 100%;
+}
+
+#main {
+    padding-bottom: 150px;  /* must be same height as the footer */
+}
+
+#footer {
+    position: relative;
+    margin-top: -150px;  /* negative value of footer height */
+    height: 150px;
+    clear: both;
+    overflow:auto;
+} 
+
+/* CLEAR FIX */
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.clearfix {
+    display: inline-block;
+}
+/* Hides from IE-mac \*/
+* html .clearfix {
+    height: 1%;
+}
+.clearfix {
+    display: block;
+}
+/* End hide from IE-mac */
+

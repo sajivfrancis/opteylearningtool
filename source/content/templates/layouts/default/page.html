@@ -1,0 +1,240 @@
+{% load staticfiles %}
+{% load static %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html {overflow-y: scroll; } lang="{{ language_code }}">
+<head>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Optey Learning Tool">
+  <meta name="author" content="Sajiv Francis">
+
+  <link rel="icon" href="{% static 'favicon.ico' %}">
+
+  <title>Optey Learning Tool</title>
+
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <style>
+/*
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+  /* Force table to not be like tables anymore */
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr { border: 1px solid #ccc; }
+
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+</style>
+
+</head>
+
+<body {overflow-y: scroll; }>
+  <nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
+    <a class="navbar-brand logo" href="/"><img class="logo" src="{% static "logo.png" %}"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      {% if user.is_authenticated %}
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ user.email }}
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+            <a class="dropdown-item" href="{% url 'accounts:change_profile' %}">Change profile</a>
+            <a class="dropdown-item" href="{% url 'accounts:change_email' %}">Change email</a>
+            <a class="dropdown-item" href="{% url 'accounts:change_password' %}">Change password</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'accounts:log_out' %}">Log out</a>
+          </div>
+        </li>
+      </ul>
+      {% else %}
+      <form class="form-inline ml-auto">
+        <a href="{% url 'accounts:log_in' %}" class="btn btn-outline-secondary">Log in</a>
+        <a href="{% url 'accounts:sign_up' %}" class="btn btn-primary ml-2">Sign up</a>
+      </form>
+      {% endif %}
+    </div>
+  </nav>
+      {% if request.user.is_authenticated %}
+      <!-- Sidebar -->
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#">Welcome to Optey's Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Overview</li>
+          </ol>
+
+          <!-- Icon Cards-->
+          <div class="row">
+            <div class="col-xl-6 col-sm-6 mb-3">
+              <div class="card text-white bg-primary o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon">
+                    <i class="fas fa-fw fa-comments"></i>
+                  </div>
+                  <div class="mr-5">CONTENTS</div>
+                </div>
+                <a class="card-footer text-white clearfix small z-1" href="{% url 'portal:content' %}">
+                  <span class="float-left">View Details</span>
+                  <span class="float-right">
+                    <i class="fas fa-angle-right"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="col-xl-6 col-sm-6 mb-3">
+              <div class="card text-white bg-warning o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon">
+                    <i class="fas fa-fw fa-list"></i>
+                  </div>
+                  <div class="mr-5">UPLOADS</div>
+                </div>
+                <a class="card-footer text-white clearfix small z-1" href="{% url 'portal:file_upload' %}">
+                  <span class="float-left">View Details</span>
+                  <span class="float-right">
+                    <i class="fas fa-angle-right"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="col-xl-6 col-sm-6 mb-3">
+              <div class="card text-white bg-success o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                  </div>
+                  <div class="mr-5">REPORTS</div>
+                </div>
+                <a class="card-footer text-white clearfix small z-1" href="{% url 'portal:reports' %}">
+                  <span class="float-left">View Details</span>
+                  <span class="float-right">
+                    <i class="fas fa-angle-right"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="col-xl-6 col-sm-6 mb-3">
+              <div class="card text-white bg-danger o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon">
+                    <i class="fas fa-fw fa-life-ring"></i>
+                  </div>
+                  <div class="mr-5">SETTINGS</div>
+                </div>
+                <a class="card-footer text-white clearfix small z-1" href="{% url 'portal:settings' %}">
+                  <span class="float-left">View Details</span>
+                  <span class="float-right">
+                    <i class="fas fa-angle-right"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+          {% else %}
+ <div class="jumbotron text-center my-auto" align="center">
+  <div class="container">
+    <strong><h1 class="display-4" style="color: #ff5c5c;">Optey Learning Tool!</h1></strong>
+    <strong><center><p>Our site contains the best learning content and tools to help you succeed.</p></center></strong>
+    <center><p><a class="btn btn-primary btn-lg" href="{% url 'accounts:sign_up' %}" role="button">Register with us! &raquo;</a></p></center>
+  </ul>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="container-fluid content-row">
+  <hr>
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="card mx-auto" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Tailored Learning</h5>
+        <p class="card-text">Learn from Summarized Content </p>
+        <a href="#" class="btn btn-primary">More Info. &raquo;</a>
+      </div>
+    </div>
+    <div class="card mx-auto" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Information Statistics</h5>
+        <p class="card-text">Artificial Intelligence Analytics </p>
+        <a href="#" class="btn btn-primary">More Info. &raquo;</a>
+      </div>
+    </div>
+    <div class="card mx-auto" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Mentoring</h5>
+        <p class="card-text">Connect with your Instructors </p>
+        <a href="#" class="btn btn-primary">More Info. &raquo;</a>
+      </div>
+    </div>
+      </div>
+</div>
+    {% endif %}
+
+    {% block content %}
+    No content.
+    {% endblock %}
+  <hr>
+  <nav class="footer fixed-bottom navbar-light bg-light">
+    <div class="container text-center">
+     <a class="navbar-text col-md-12 col-sm-12 col-xs-12" href="#">&copy; Optey Learning Tool - 2018</a>
+   </div>
+ </nav>
+</div>
+</div>
+
+ <script src="{% static 'vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+ <script src="{% static 'vendor/popper/popper.min.js' %}"></script>
+ <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+ <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+
+</body>
+</html>

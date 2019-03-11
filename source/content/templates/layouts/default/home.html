@@ -1,0 +1,47 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Optey Learning Tool{% endblock title %}
+
+{% block content %}
+<head>
+	<link rel='stylesheet' href="{% static 'css/bootstrap-theme.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<div class="fullheight">  <!--  increased the jumbotron width -->
+  <div class="jumbotron text-center my-auto" align="center">
+    <div class="container">
+      <strong><h1 class="display-3" style="color: #ff5c5c;">Optey Learning Tool!</h1></strong>
+      <strong><center><p>Our site contains the best learning content and tools to help you succeed.</p></center></strong>
+      <center><p><a class="btn btn-primary btn-lg" href="{% url 'accounts:sign_up' %}" role="button">Register with us! &raquo;</a></p></center>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <hr>
+  <!-- Example row of columns -->
+  <div class="row">
+  <div class="card mx-auto" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Tailored Learning</h5>
+    <p class="card-text">Learn from Summarized Content </p>
+    <a href="#" class="btn btn-primary">More Info. &raquo;</a>
+  </div>
+</div>
+  <div class="card mx-auto" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Information Statistics</h5>
+    <p class="card-text">Artificial Intelligence Analytics </p>
+    <a href="#" class="btn btn-primary">More Info. &raquo;</a>
+  </div>
+</div>
+  <div class="card mx-auto" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Mentoring</h5>
+    <p class="card-text">Connect with your Instructors </p>
+    <a href="#" class="btn btn-primary">More Info. &raquo;</a>
+  </div>
+</div>
+</div>
+{% endblock content %}
+

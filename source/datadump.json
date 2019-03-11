@@ -1,0 +1,34 @@
+[
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$100000$1ga56WDTnPU4$0FEKwkbJKOAVt0JykqCb13As9xUSGXFde1WocI7CgSY=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "sajivfrancis",
+        "first_name": "",
+        "last_name": "",
+        "email": "sajiv.francis@student.fairfield.edu",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2018-10-31T13:54:37.392Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "lpmeyijza2gsvt6hrpsqn3hsj0902f4r",
+    "fields": {
+        "session_data": "YTI3YzVkYjRhZTg2N2ZjMTA3Mzk1OGJhMjMxOWIyZGNmZTZjMDZlMzp7InRlc3Rjb29raWUiOiJ3b3JrZWQiLCJfbGFuZ3VhZ2UiOiJlbiJ9",
+        "expire_date": "2018-11-14T13:53:09.848Z"
+    }
+},
+{
+    "model": "sites.site",
+    "fields": {
+        "domain": "example.com",
+        "name": "example.com"
+    }
+}
+]

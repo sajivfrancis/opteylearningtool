@@ -1,0 +1,117 @@
+{% load staticfiles %}
+{% load static %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html {overflow-y: scroll; } lang="{{ language_code }}">
+<head>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Optey Learning Tool">
+  <meta name="author" content="Sajiv Francis">
+  <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
+  <link rel="icon" href="{% static 'favicon.ico' %}">
+
+  <title>Optey Learning Tool</title>
+
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
+</head>
+
+<body {overflow-y: scroll; }>
+  <nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
+    <a class="navbar-brand logo" href="/"><img class="logo" src="{% static "logo.png" %}"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      {% if user.is_authenticated %}
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="{% url 'accounts:log_in' %}" class="btn btn-primary">Back to Dashboard</a>
+        </li>
+      </ul>
+      {% else %}
+      <form class="form-inline ml-auto">
+        <a href="{% url 'accounts:log_in' %}" class="btn btn-outline-secondary">Log in</a>
+        <a href="{% url 'accounts:sign_up' %}" class="btn btn-primary ml-2">Sign up</a>
+      </form>
+      {% endif %}
+    </div>
+  </nav>
+  <div class="container">
+    <div class="fullheight">  <!--  increased the jumbotron width -->
+      {% if request.user.is_authenticated %}
+      <a class="btn btn-success" href="/portal/download/{{ file.id }}/{{ chartType }}" >Download as PDF</a>
+      <button type="button" class="btn btn-info" onclick="printJS('/portal/download/{{ file.id }}/{{ chartType }}')">
+   Print PDF
+</button>
+      <div>{{ chartHtml|safe }}</div>
+
+        {% else %}
+        <div class="jumbotron text-center my-auto" align="center">
+          <div class="container">
+            <strong><h1 class="display-4" style="color: #ff5c5c;">Optey Learning Tool!</h1></strong>
+            <strong><center><p>Our site contains the best learning content and tools to help you succeed.</p></center></strong>
+            <center><p><a class="btn btn-primary btn-lg" href="{% url 'accounts:sign_up' %}" role="button">Register with us! &raquo;</a></p></center>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="container-fluid content-row">
+      <hr>
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="card mx-auto" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Tailored Learning</h5>
+            <p class="card-text">Learn from Summarized Content </p>
+            <a href="#" class="btn btn-primary">More Info. &raquo;</a>
+          </div>
+        </div>
+        <div class="card mx-auto" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Information Statistics</h5>
+            <p class="card-text">Artificial Intelligence Analytics </p>
+            <a href="#" class="btn btn-primary">More Info. &raquo;</a>
+          </div>
+        </div>
+        <div class="card mx-auto" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Mentoring</h5>
+            <p class="card-text">Connect with your Instructors </p>
+            <a href="#" class="btn btn-primary">More Info. &raquo;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+
+    {% block content %}
+    {% endblock %}
+    <hr>
+    <nav class="footer fixed-bottom navbar-light bg-light">
+      <div class="container text-center">
+       <a class="navbar-text col-md-12 col-sm-12 col-xs-12" href="#">&copy; Optey Learning Tool - 2018</a>
+     </div>
+   </nav>
+ </div>
+</div>
+
+<script src="{% static 'vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'vendor/popper/popper.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+
+</body>
+</html>
