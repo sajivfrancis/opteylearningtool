@@ -31,7 +31,7 @@ def png2Base(path):
         encoded_string = base64.b64encode(image_file.read())
         return "data:image/png;base64,"+encoded_string.decode("utf-8")
 
-# Highscore for frequent words. first argument is the frequency, next how many places there are
+# Highscore for frequent words. First argument is the frequency, next how many places there are?
 def getHighest(freq,maxHighscore):
     keyArray = []
     valArray = []
@@ -59,16 +59,9 @@ def getFreqByText(text,ignoreStopWords = False):
 
 # get the tokens/words only.
 def getTokens(text,ignoreStopWords = False):
-
-    # RegexpTokenizer-method
-    #tokenizer = RegexpTokenizer(r'\w+')
-    #tokens = tokenizer.tokenize(text)
-
     # Word-tokenize-method
     tokens = nltk.tokenize.word_tokenize(text)
-
     # End split to words
-
     # Start filter out stopWords
     filtered_sentence = [w for w in tokens if not w in stop_words]
     filtered_sentence = []
