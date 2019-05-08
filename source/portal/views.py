@@ -31,7 +31,7 @@ def png2Base(path):
         encoded_string = base64.b64encode(image_file.read())
         return "data:image/png;base64,"+encoded_string.decode("utf-8")
 
-# do the highscore for frequent words. first argument is the frequencie, next how many places there are
+# Highscore for frequent words. first argument is the frequency, next how many places there are
 def getHighest(freq,maxHighscore):
     keyArray = []
     valArray = []
@@ -53,20 +53,18 @@ def getHighest(freq,maxHighscore):
         wPos+=1
     return [keyArray,valArray]
 
-# already half-deprecated method as it does only one thing..
+# half-deprecated method
 def getFreqByText(text,ignoreStopWords = False):
     return nltk.FreqDist(getTokens(text,ignoreStopWords))
 
-# get the tokens/words only. mainly used because of getfreqbytext, but needed by wordcloud too
+# get the tokens/words only.
 def getTokens(text,ignoreStopWords = False):
-
-    # Split to words. You have two diffrent methods, one should be commented out.
 
     # RegexpTokenizer-method
     #tokenizer = RegexpTokenizer(r'\w+')
     #tokens = tokenizer.tokenize(text)
 
-    # Word-tokenize-method (seems to need a bigger stopWord-list, i extended it)
+    # Word-tokenize-method
     tokens = nltk.tokenize.word_tokenize(text)
 
     # End split to words
@@ -180,7 +178,6 @@ def processData(text, chartType):
          )]
      elif((chartType == "ps") | (chartType == "Paragraph scatter")):
          print("Paragraph SCATTER CHART")
-         #tokenized_sentences=nltk.sent_tokenize(text.replace("\n","<br>"))
          tokenized_sentences=text.split("\n\n")
          keyArray = []
          valArray = []
@@ -193,7 +190,6 @@ def processData(text, chartType):
          while(wPos < 5):
              for key in tokenized_sentences:
                  words=nltk.tokenize.word_tokenize(key)
-                 #words = tokenizer.tokenize(text)
                  filtered_sentence = [w for w in words if not w in stop_words]
                  filtered_sentence = []
                  for w in words:
@@ -206,9 +202,6 @@ def processData(text, chartType):
                  val = len(words)
                  if((val>highestVal) & ((val <lowestValue)|(lowestValue==0))):
                      highestVal = val
-                     # Inject line-breaks for making it more read-able (try)
-                     #if(len(key)>400):
-                         #key = key[:60]+"<br>"+key[60:120]+"<br>"+key[120:180]+"<br>"+key[180:240]+"<br>"+key[240:300]+"<br>"+key[360:]
                      highestWord = key
              if(highestVal>0):
                  paragraphTextInfo += "<li><b>Paragraph</b> : "+highestWord+" <b>has "+str(highestVal)+" words.</b></li>"
@@ -219,7 +212,6 @@ def processData(text, chartType):
              wPos+=1
          return [go.Bar(x=keyArray,y=valArray)]
      elif((chartType == "ds") | (chartType == "Document statistics")):
-         #tokenized_sentences=nltk.sent_tokenize(text)
          sentenceCount = len(nltk.sent_tokenize(text))
          paragraphCount=len(text.split("\n\n"))
          tokenizer = RegexpTokenizer(r'\w+')
@@ -227,19 +219,14 @@ def processData(text, chartType):
          filtered_sentence = [w for w in tokens if not w in stop_words]
          filtered_sentence = []
          for w in tokens:
-             #if w not in stop_words:
-                 #filtered_sentence.append(w)
              filtered_sentence.append(w)
          wordCount = len(filtered_sentence)
          charCount = len(text)
-
          keyArray = []
-         #keyArray.append("Chars")
          keyArray.append("Words")
          keyArray.append("Sentences")
          keyArray.append("Paragraphs")
          valArray = []
-         #valArray.append(charCount)
          valArray.append(wordCount)
          valArray.append(sentenceCount)
          valArray.append(paragraphCount)
@@ -334,7 +321,7 @@ def download(request, id, chartType):
          theHtml += "<p><img src='"+png2Base(file.file.path+".img.png") +"' /></p>"
      theHtml += "</body></html>"
 
-     # before, we need to differ between single charts and summarzie - rest is same for both
+     # Differ between single charts and summarzied charts
      convert_html_to_pdf(theHtml, file.file.path+".pdf")
      pdfStream = open(file.file.path+".pdf", 'rb')
      response = HttpResponse(pdfStream, content_type='application/pdf')
